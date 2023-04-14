@@ -11,7 +11,6 @@ Created on 2023/04/14 11:13:39
 @Describe: 单变量编码
 """
 
-
 import warnings
 
 warnings.filterwarnings("ignore")
@@ -41,14 +40,12 @@ class UnsuperCategorEncoding(object):
         return np.array(x_enc).flatten()
     
     def random_encoding(self, seed: int = None):
-        # TODO: 优化效率
+        # TODO: 优化效率.
         x_sorted = sorted(set(self.x))
 
         if seed is not None:
             random.seed(seed)
-            random.shuffle(x_sorted)
-        else:
-            random.shuffle(x_sorted)
+        random.shuffle(x_sorted)
 
         codes = list(range(1, len(x_sorted) + 1))
         x_enc = self.x.replace(dict(zip(x_sorted, codes)))
@@ -65,7 +62,7 @@ class UnsuperCategorEncoding(object):
         try:
             assert method in UNSUPER_METHODS
         except:
-            raise ValueError("Invalid method = "{}"".format(method))
+            raise ValueError(f'Invalid method = \"{method}\"')
         
         x_enc = None
         if method == "ordinal":
@@ -74,9 +71,6 @@ class UnsuperCategorEncoding(object):
             x_enc = self.random_encoding(**kwargs)
         elif method == "count":
             x_enc = self.count_encoding()
-        else:
-            pass
-        
         return x_enc
     
 
@@ -99,27 +93,19 @@ class SuperCategorEncoding(object):
 
     def target_encoding(self):
         enc = ce.TargetEncoder(cols = ["x"], smoothing = 1.0)
-        enc.fit(self.x, self.y)
-        x_enc = enc.transform(self.x)
-        return np.array(x_enc).flatten()
+        return self._encode_transform(enc)
     
     def m_estimator_encoding(self):
         enc = ce.MEstimateEncoder(cols = ["x"], m = 20.0)
-        enc.fit(self.x, self.y)
-        x_enc = enc.transform(self.x)
-        return np.array(x_enc).flatten()
+        return self._encode_transform(enc)
     
     def james_stein_encoding(self):
         enc = ce.JamesSteinEncoder(cols = ["x"])
-        enc.fit(self.x, self.y)
-        x_enc = enc.transform(self.x)
-        return np.array(x_enc).flatten()
+        return self._encode_transform(enc)
     
     def glmm_encoding(self):
         enc = ce.GLMMEncoder(cols = ["x"])
-        enc.fit(self.x, self.y)
-        x_enc = enc.transform(self.x)
-        return np.array(x_enc).flatten()
+        return self._encode_transform(enc)
     
     def woe_encoding(self, **kwargs):
         y_mean = self.y.mean()
@@ -134,12 +120,15 @@ class SuperCategorEncoding(object):
     
     def leave_one_out_encoding(self):
         enc = ce.LeaveOneOutEncoder(cols = ["x"])
-        enc.fit(self.x, self.y)
-        x_enc = enc.transform(self.x)
-        return np.array(x_enc).flatten()
+        return self._encode_transform(enc)
     
     def catboost_encoding(self):
         enc = ce.CatBoostEncoder(cols = ["x"])
+        return self._encode_transform(enc)
+
+    # TODO Rename this here and in `target_encoding`, `m_estimator_encoding`, `james_stein_encoding`, `glmm_encoding`, `leave_one_out_encoding` and `catboost_encoding`
+    def _encode_transform(self, enc):
+        """编码并转换"""
         enc.fit(self.x, self.y)
         x_enc = enc.transform(self.x)
         return np.array(x_enc).flatten()
@@ -153,9 +142,9 @@ class SuperCategorEncoding(object):
     def encode(self, method: str, **kwargs):
         try:
             assert method in SUPER_METHODS
-        except Exception as _:
-            raise ValueError("Invalid method = "{}"".format(method))
-
+        except:
+            raise ValueError(f'Invalid method = \"{method}\"')
+        
         x_enc = None
         if method == "target":
             x_enc = self.target_encoding()
@@ -173,7 +162,4 @@ class SuperCategorEncoding(object):
             x_enc = self.catboost_encoding()
         elif method == "mhg":
             x_enc = self.mhg_encoding()
-        else:
-            pass
-
         return x_enc

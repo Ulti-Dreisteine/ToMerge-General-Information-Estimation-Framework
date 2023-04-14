@@ -12,11 +12,6 @@ Created on 2022/09/18 16:19:57
 """
 
 import numpy as np
-# import sys
-# import os
-
-# BASE_DIR = os.path.abspath(os.path.join(os.path.abspath(__file__), "../" * 3))
-# sys.path.insert(0, BASE_DIR)
 
 from .marg_entropy import MargEntropy
 from ..mutual_info.mi import MutualInfoGIEF
@@ -35,54 +30,3 @@ class CondEntropy(object):
     def __call__(self, k=3, metric="chebyshev"):
         return MargEntropy(self.x, self.xtype)(k=k, metric=metric) -\
             MutualInfoGIEF(self.x, self.xtype, self.z, self.ztype)(k=k, metric=metric)
-
-
-if __name__ == "__main__":
-    def test_cc():
-        x = np.random.normal(0, 1, 1000)
-        z = np.random.normal(0, 1, 1000)
-        
-        self = CondEntropy(x, "c", z, "c")
-        ce = self()
-        
-        print(f"ce: {ce}")
-        
-    def test_dd():
-        x = np.random.randint(0, 5, 1000)
-        z = np.random.randint(0, 5, 1000)
-        
-        self = CondEntropy(x, "d", z, "d")
-        ce = self()
-        
-        print(f"ce: {ce}")
-        
-        
-    def test_cd():
-        x = np.random.normal(0, 1, 1000)
-        z = np.random.randint(0, 5, 1000)
-        
-        self = CondEntropy(x, "c", z, "d")
-        ce = self()
-        
-        print(f"ce: {ce}")
-        
-    def test_dc():
-        x = np.random.randint(0, 5, 1000)
-        z = np.random.normal(0, 1, 1000)
-        
-        self = CondEntropy(x, "d", z, "c")
-        ce = self()
-        
-        print(f"ce: {ce}")
-        
-    print("test cc")
-    test_cc()
-    
-    print("test dd")
-    test_dd()
-    
-    print("test cd")
-    test_cd()
-    
-    print("test dc")
-    test_dc()
