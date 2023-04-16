@@ -75,24 +75,25 @@ class SuperCategorEncoding(object):
         :param x: x序列, x一定为Nominal类别型变量
         :param y: y序列, y一定为数值型变量
         """
+        # NOTE x值需为int
         self.x = pd.Series(np.array(x).astype(np.int).flatten(), name = "x")  # type: pd.Series
         self.y = pd.Series(np.array(y).astype(np.float32).flatten(), name = "y")  # type: pd.Series
 
     def target_encoding(self):
         enc = ce.TargetEncoder(cols = ["x"], smoothing = 1.0)
-        return self._extracted_from_catboost_encoding_3(enc)
+        return self._encode_transform(enc)
     
     def m_estimator_encoding(self):
         enc = ce.MEstimateEncoder(cols = ["x"], m = 20.0)
-        return self._extracted_from_catboost_encoding_3(enc)
+        return self._encode_transform(enc)
     
     def james_stein_encoding(self):
         enc = ce.JamesSteinEncoder(cols = ["x"])
-        return self._extracted_from_catboost_encoding_3(enc)
+        return self._encode_transform(enc)
     
     def glmm_encoding(self):
         enc = ce.GLMMEncoder(cols = ["x"])
-        return self._extracted_from_catboost_encoding_3(enc)
+        return self._encode_transform(enc)
     
     def woe_encoding(self, **kwargs):
         y_mean = self.y.mean()
@@ -107,14 +108,15 @@ class SuperCategorEncoding(object):
     
     def leave_one_out_encoding(self):
         enc = ce.LeaveOneOutEncoder(cols = ["x"])
-        return self._extracted_from_catboost_encoding_3(enc)
+        return self._encode_transform(enc)
     
     def catboost_encoding(self):
         enc = ce.CatBoostEncoder(cols = ["x"])
-        return self._extracted_from_catboost_encoding_3(enc)
+        return self._encode_transform(enc)
 
     # TODO Rename this here and in `target_encoding`, `m_estimator_encoding`, `james_stein_encoding`, `glmm_encoding`, `leave_one_out_encoding` and `catboost_encoding`
-    def _extracted_from_catboost_encoding_3(self, enc):
+    def _encode_transform(self, enc):
+        """编码并转换"""
         enc.fit(self.x, self.y)
         x_enc = enc.transform(self.x)
         return np.array(x_enc).flatten()

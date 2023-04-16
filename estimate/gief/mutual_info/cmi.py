@@ -22,8 +22,8 @@ from estimate.setting import DTYPES, BASE
 from estimate.util import stdize_values
 from ._kraskov import kraskov_mi as cal_kraskov_cmi
 from .mi import MutualInfoGIEF
-from estimate.gief.entropy.cond_entropy import CondEntropy
-from estimate.gief.entropy.marg_entropy import MargEntropy
+from ..entropy.cond_entropy import CondEntropy
+from ..entropy.marg_entropy import MargEntropy
 
 
 class CondMutualInfoGIEF(object):

@@ -20,7 +20,7 @@ sys.path.insert(0, BASE_DIR)
 
 from _mic_rmic import MaximalInfoCoeff, RefinedMaximalInfoCoeff
 from _univar_encoding import SuperCategorEncoding
-from util import stdize_values, discretize_arr
+from util import discretize_arr
 
 
 # ---- 数据压缩编码 ---------------------------------------------------------------------------------
