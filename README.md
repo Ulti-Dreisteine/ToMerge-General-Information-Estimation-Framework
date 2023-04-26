@@ -41,6 +41,8 @@ estimate --> MIC --> RMIC
 estimate --> other --> coefficient --> DistCorr & PearsonCorr & SpearmanCorr
 estimate --> quant_based --> MI-cut & MI-qcut & MI-Darbellay
 
-statistical_significance --> bootstrap
-estimate --cal_assoc, cal_cond_assoc--> bootstrap
+statistical_significance --cal_general_assoc--> bootstrap
+statistical_significance --cal_general_assoc--> surrog_indep
+estimate ----> bootstrap
+estimate --> surrog_indep
 ```
