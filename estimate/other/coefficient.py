@@ -52,16 +52,3 @@ def _encode(x, y):
     """
     super_enc = SuperCategorEncoding(x, y)
     return super_enc.mhg_encoding()
-
-
-# def cal_mic(x, y, x_type: str="c"):
-#     if x_type == "d":
-#         x = _encode(x, y)
-#     return PairwiseMIC(x, y).cal_assoc()
-
-
-# def cal_rmic(x, y, x_type: str="c"):
-#     if x_type == "d":
-#         x = _encode(x, y)
-#     return PairwiseRMIC(x, y).cal_assoc()
-

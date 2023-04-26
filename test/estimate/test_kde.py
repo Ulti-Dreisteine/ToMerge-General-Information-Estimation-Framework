@@ -24,12 +24,14 @@ x = np.random.normal(0, 1, 1000)
 y = np.random.normal(0, 1, 1000)
 xy = np.c_[x, y]
 
-# ---- 测试 -------------------------------------------------------------------------------------
+# ---- 测试 -----------------------------------------------------------------------------------------
 
 # 信息熵
 self = MargEntropy(xy)
 entropy = self()
+print(f"entropy: {round(entropy, 4)}")
 
 # 边际熵
 self = MutualInfoKDE(x, y)
 mi = self()
+print(f"mi: {round(mi, 4)}")

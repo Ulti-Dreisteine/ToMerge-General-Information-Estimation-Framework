@@ -10,7 +10,7 @@ from estimate.gief import MargEntropy, CondEntropy, MutualInfoGIEF, CondMutualIn
 
 # ---- 边际熵 --------------------------------------------------------------------------------------
 
-def test_c():
+def test_marg_c():
     x = np.random.normal(0, 1, 10000)
     y = np.random.normal(0, 1, 10000)
     
@@ -26,7 +26,7 @@ def test_c():
     print(f"Hx: {Hx} \tHy: {Hy} \tHxy: {Hxy} \tMI: {Hx + Hy - Hxy}") # NOTE 此处MI计算不准确
     
     
-def test_d():
+def test_marg_d():
     x = np.random.randint(0, 5, 10000)
     y = np.random.randint(10, 20, 10000)
     
@@ -43,16 +43,16 @@ def test_d():
 
 
 print("测试边际熵")
-print("test c")    
-test_c()
+print("test marginal c")
+test_marg_c()
 
-print("test d")    
-test_d()
+print("test marginal d")
+test_marg_d()
 
 
 # ---- 条件熵 --------------------------------------------------------------------------------------
 
-def test_cc():
+def test_cond_cc():
     x = np.random.normal(0, 1, 1000)
     z = np.random.normal(0, 1, 1000)
     
@@ -62,7 +62,7 @@ def test_cc():
     print(f"ce: {ce}")
     
     
-def test_dd():
+def test_cond_dd():
     x = np.random.randint(0, 5, 1000)
     z = np.random.randint(0, 5, 1000)
     
@@ -72,7 +72,7 @@ def test_dd():
     print(f"ce: {ce}")
     
     
-def test_cd():
+def test_cond_cd():
     x = np.random.normal(0, 1, 1000)
     z = np.random.randint(0, 5, 1000)
     
@@ -82,7 +82,7 @@ def test_cd():
     print(f"ce: {ce}")
     
     
-def test_dc():
+def test_cond_dc():
     x = np.random.randint(0, 5, 1000)
     z = np.random.normal(0, 1, 1000)
     
@@ -93,22 +93,22 @@ def test_dc():
 
 
 print("\n测试条件熵")
-print("test cc")
-test_cc()
+print("test cond cc")
+test_cond_cc()
 
-print("test dd")
-test_dd()
+print("test cond dd")
+test_cond_dd()
 
-print("test cd")
-test_cd()
+print("test cond cd")
+test_cond_cd()
 
-print("test dc")
-test_dc()
+print("test cond dc")
+test_cond_dc()
 
 
 # ---- 互信息 --------------------------------------------------------------------------------------
 
-def test_cc():
+def test_mi_cc():
     x = np.random.normal(0, 1, 10000)
     y = np.random.normal(0, 1, 10000)
     
@@ -127,7 +127,7 @@ def test_cc():
     print(f"Hx + Hy - Hxy: {Hx + Hy - Hxy} \tMI: {MI}")
     
     
-def test_dd():
+def test_mi_dd():
     x = np.random.randint(0, 5, 10000)
     y = np.random.randint(0, 5, 10000)
     
@@ -146,7 +146,7 @@ def test_dd():
     print(f"Hx + Hy - Hxy: {Hx + Hy - Hxy} \tMI: {MI}")
     
     
-def test_cd():
+def test_mi_cd():
     x = np.random.normal(0, 1, 10000)
     y = np.random.randint(0, 5, 10000)
     
@@ -156,7 +156,7 @@ def test_cd():
     print(f"MI: {MI}")
     
     
-def test_dc():
+def test_mi_dc():
     x = np.random.randint(0, 5, 10000)
     y = np.random.normal(0, 1, 10000)
     
@@ -167,33 +167,33 @@ def test_dc():
 
 
 print("\n测试互信息")
-print("test cc")
-test_cc()
+print("test cond cc")
+test_mi_cc()
 
-print("test dd")
-test_dd()
+print("test cond dd")
+test_mi_dd()
 
-print("test cd")
-test_cd()
+print("test cond cd")
+test_mi_cd()
 
-print("test dc")
-test_dc()
+print("test cond dc")
+test_mi_dc()
 
 
 # ---- 测试条件互信息 -------------------------------------------------------------------------------
 
-def test_ccc():
-        x = np.random.normal(0, 1, 20000)
-        y = np.random.normal(0, 1, 20000)
-        z = np.random.normal(0, 1, 20000)
-        
-        self = CondMutualInfoGIEF(x, "c", y, "c", z, "c")
-        cmi = self()
-        
-        print(f"cmi: {cmi}")
+def test_cmi_ccc():
+    x = np.random.normal(0, 1, 20000)
+    y = np.random.normal(0, 1, 20000)
+    z = np.random.normal(0, 1, 20000)
+    
+    self = CondMutualInfoGIEF(x, "c", y, "c", z, "c")
+    cmi = self()
+    
+    print(f"cmi: {cmi}")
       
         
-def test_cdc():
+def test_cmi_cdc():
     x = np.random.normal(0, 1, 10000)
     y = np.random.randint(0, 5, 10000)
     z = np.random.normal(0, 1, 10000)
@@ -204,7 +204,7 @@ def test_cdc():
     print(f"cmi: {cmi}")
     
     
-def test_cdd():
+def test_cmi_cdd():
     x = np.random.normal(0, 1, 20000)
     y = np.random.randint(0, 5, 20000)
     z = np.random.randint(0, 3, 20000)
@@ -215,7 +215,7 @@ def test_cdd():
     print(f"cmi: {cmi}")
 
 
-def test_ddc():
+def test_cmi_ddc():
     x = np.random.randint(0, 5, 20000)
     y = np.random.randint(0, 3, 20000)
     z = np.random.normal(0, 1, 20000)
@@ -226,7 +226,7 @@ def test_ddc():
     print(f"cmi: {cmi}")
 
 
-def test_ccd():
+def test_cmi_ccd():
     x = np.random.normal(0, 1, 20000)
     y = np.random.normal(0, 1, 20000)
     z = np.random.randint(0, 3, 20000)
@@ -238,17 +238,17 @@ def test_ccd():
     
     
 print("\n测试条件互信息")
-print("test ccc")
-test_ccc()
+print("test cmi ccc")
+test_cmi_ccc()
 
-print("test cdc")
-test_cdc()
+print("test cmi cdc")
+test_cmi_cdc()
 
-print("test cdd")
-test_cdd()
+print("test cmi cdd")
+test_cmi_cdd()
 
-print("test ddc")
-test_ddc()
+print("test cmi ddc")
+test_cmi_ddc()
 
-print("test ccd")
-test_ccd()
+print("test cmi ccd")
+test_cmi_ccd()
