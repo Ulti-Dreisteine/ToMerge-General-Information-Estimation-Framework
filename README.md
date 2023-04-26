@@ -27,4 +27,20 @@
                 |-- mi.py       # 互信息估计
                 |-- cmi.py      # 条件互信息估计
 
+    |-- statistical_significance
+        |-- bootstrap       # 基于等量有放回自举的关联度量
+
+```
+
+```mermaid
+graph LR
+
+estimate --> GIEF --> H-G & MI-G & CMI-G
+estimate --> KDE --> MI-KDE
+estimate --> MIC --> RMIC
+estimate --> other --> coefficient --> DistCorr & PearsonCorr & SpearmanCorr
+estimate --> quant_based --> MI-cut & MI-qcut & MI-Darbellay
+
+statistical_significance --> bootstrap
+estimate --cal_assoc, cal_cond_assoc--> bootstrap
 ```
