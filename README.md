@@ -29,6 +29,7 @@
 
     |-- statistical_significance
         |-- bootstrap       # 基于等量有放回自举的关联度量
+        |-- surrog_indep    # 基于代用数据的独立性检验
 
 ```
 
@@ -41,8 +42,8 @@ estimate --> MIC --> RMIC
 estimate --> other --> coefficient --> DistCorr & PearsonCorr & SpearmanCorr
 estimate --> quant_based --> MI-cut & MI-qcut & MI-Darbellay
 
-statistical_significance --cal_general_assoc--> bootstrap
-statistical_significance --cal_general_assoc--> surrog_indep
-estimate ----> bootstrap
-estimate --> surrog_indep
+statistical_significance ----> bootstrap
+statistical_significance ----> surrog_indep
+estimate --cal_general_assoc--> bootstrap
+estimate --cal_general_assoc--> surrog_indep
 ```
