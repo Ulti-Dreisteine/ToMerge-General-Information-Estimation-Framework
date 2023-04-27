@@ -87,6 +87,7 @@ if __name__ == "__main__":
         ax.set_xlabel("$x$")
         ax.set_ylabel("$y$")
     plt.tight_layout()
+    plt.savefig("数据可视化.png", dpi=450)
     
     # #### 条件独立检验 #############################################################################
     
@@ -112,4 +113,5 @@ if __name__ == "__main__":
         ax.set_title(f"dataset: {func}, independence detected: {indep}", fontsize=18)
         ax.set_xlabel("CMI value")
     plt.tight_layout()
+    plt.savefig("条件互信息.png", dpi=450)
     
