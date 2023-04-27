@@ -36,10 +36,12 @@ class MutualInfoClassic(object):
         x_enc = discretize_series(self.x_norm, method=method).astype(int)
         y_enc = discretize_series(self.y_norm, method=method).astype(int)
         if self.z_norm is None:
-            return drv.information_mutual(x_enc, y_enc)
+            mi = drv.information_mutual(x_enc, y_enc)
+            return float(mi)
         
         z_enc = discretize_series(self.z_norm, method=method).astype(int)
-        return drv.information_mutual_conditional(x_enc, y_enc, z_enc)
+        cmi = drv.information_mutual_conditional(x_enc, y_enc, z_enc)
+        return float(cmi)  # NOTE: drv.infor_mutual_cond居然返回array格式
     
 
 if __name__ == "__main__":
