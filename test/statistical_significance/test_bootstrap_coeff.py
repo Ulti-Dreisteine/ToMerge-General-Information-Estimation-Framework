@@ -7,7 +7,7 @@ BASE_DIR = os.path.abspath(os.path.join(os.path.abspath(__file__), "../" * 3))
 sys.path.insert(0, BASE_DIR)
 
 from setting import plt
-from statistical_significance.bootstrap_assoc_est import cal_bootstrap_assoc
+from statistical_significance.bootstrap_coeff import cal_bootstrap_coeff
 
 
 def gen_data():
@@ -31,5 +31,5 @@ if __name__ == "__main__":
 
     rounds = 1000
     method = "DistCorr"
-    assoc_mean, assocs_bt = cal_bootstrap_assoc(x, y, method, xtype="c", ytype="c", rounds=rounds)
+    assoc_mean, assocs_bt = cal_bootstrap_coeff(x, y, method, xtype="c", ytype="c", rounds=rounds)
     az.plot_posterior({f"{method}_Bootstrap": assocs_bt}, kind="hist", bins=20, ref_val=[assoc_mean])

@@ -17,7 +17,7 @@ import random
 from . import cal_general_assoc
 
 
-def cal_bootstrap_assoc(x, y, method, z=None, xtype=None, ytype=None, ztype=None, rounds=100, 
+def cal_bootstrap_coeff(x, y, method, z=None, xtype=None, ytype=None, ztype=None, rounds=100, 
                         **kwargs):
     """基于自举重采样的关联系数估计
 

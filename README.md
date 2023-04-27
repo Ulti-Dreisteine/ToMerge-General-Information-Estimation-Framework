@@ -34,16 +34,31 @@
 ```
 
 ```mermaid
-graph LR
+flowchart LR
 
-estimate --> GIEF --> H-G & MI-G & CMI-G
-estimate --> KDE --> MI-KDE
-estimate --> MIC --> RMIC
-estimate --> other --> coefficient --> DistCorr & PearsonCorr & SpearmanCorr
-estimate --> quant_based --> MI-cut & MI-qcut & MI-Darbellay
+subgraph estimate
+    subgraph gief
+        H-G & MI-G & CMI-G
+    end
 
-statistical_significance ----> bootstrap
-statistical_significance ----> surrog_indep
-estimate --cal_general_assoc--> bootstrap
-estimate --cal_general_assoc--> surrog_indep
+    subgraph kde
+        MI-KDE
+    end
+
+    subgraph other
+        coefficient --> PearsonCorr & SpearmanCorr & DistCorr
+    end
+
+    subgraph quant_based
+        MI-Classic --> MI-cut & MI-qcut
+        MI-Darbellay
+    end
+end
+
+subgraph statistical_significance
+    cal_general_assoc --> bootstrap_coeff & surrg_indep_test
+end
+
+estimate --cal_assoc & cal_cond_assoc--> cal_general_assoc
 ```
+
