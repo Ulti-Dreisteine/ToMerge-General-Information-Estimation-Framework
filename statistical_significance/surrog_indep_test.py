@@ -11,9 +11,16 @@ Created on 2023/04/26 16:45:20
 @Describe: 基于代用数据的独立性测试
 """
 
+import random
 import numpy as np
 
 from . import cal_general_assoc
+
+
+def _gen_surrog_data(idxs_bt, x):
+    idxs_srg = np.random.permutation(idxs_bt)
+    x_srg = x.copy()[idxs_srg]
+    return x_srg
 
 
 def exec_surrog_indep_test(x, y, method, z=None, xtype=None, ytype=None, ztype=None, rounds=100, 
@@ -40,12 +47,20 @@ def exec_surrog_indep_test(x, y, method, z=None, xtype=None, ytype=None, ztype=N
     assoc = cal_general_assoc(x, y, z, method, xtype, ytype, ztype, **kwargs)
     
     # 计算背景值
+    size_bt = len(x)
     idxs = np.arange(len(x))
     assocs_srg = np.array([])
     for _ in range(rounds):
-        idxs_srg = np.random.permutation(idxs)
-        x_srg = x[idxs_srg]
-        assoc_srg = cal_general_assoc(x_srg, y, z, method, xtype, ytype, ztype, **kwargs)
+        
+        # idxs_srg = np.random.permutation(idxs)
+        # x_srg = x[idxs_srg]
+        
+        # NOTE: Bootstrap有放回等样本量采样
+        idxs_bt = random.choices(idxs, k=size_bt)
+        
+        # 代用数据
+        x_srg, y_srg = _gen_surrog_data(idxs_bt, x), _gen_surrog_data(idxs_bt, y)
+        assoc_srg = cal_general_assoc(x_srg, y_srg, z, method, xtype, ytype, ztype, **kwargs)
         assocs_srg = np.append(assocs_srg, assoc_srg)
     
     # 计算显著性

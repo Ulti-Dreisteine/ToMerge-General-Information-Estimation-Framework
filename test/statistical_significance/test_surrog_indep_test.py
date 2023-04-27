@@ -38,16 +38,28 @@ def gen_test_data(func, N, scale):
 
 
 if __name__ == "__main__":
-    x, y = gen_test_data("sin_low_freq", 1000, 1.0)
+    x, y = gen_test_data("sin_low_freq", 1000, 0.5)
     
     plt.scatter(x, y, color="w", edgecolor="k")
     
-    method = "MI-GIEF"
     rounds = 100
     alpha = 0.05
+    
+    # 二元变量独立性检验
+    method = "MI-GIEF"
     assoc, (p, indep, assocs_srg) = exec_surrog_indep_test(
         x, y, method, xtype="c", ytype="c", rounds=rounds, alpha=alpha)
-
+    az.plot_posterior(
+        {f"{method}_Surrog": assocs_srg}, 
+        kind="hist", 
+        bins=20, 
+        ref_val=assoc, 
+        hdi_prob=1 - alpha * 2)
+    
+    # 三元变量独立性检验
+    method = "CMI-GIEF"
+    assoc, (p, indep, assocs_srg) = exec_surrog_indep_test(
+        x, y, method, z=y, xtype="c", ytype="c", ztype="c", rounds=rounds, alpha=alpha)
     az.plot_posterior(
         {f"{method}_Surrog": assocs_srg}, 
         kind="hist", 
