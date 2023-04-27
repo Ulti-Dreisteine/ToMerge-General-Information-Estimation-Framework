@@ -59,7 +59,7 @@ if __name__ == "__main__":
     # 三元变量独立性检验
     method = "CMI-GIEF"
     assoc, (p, indep, assocs_srg) = exec_surrog_indep_test(
-        x, y, method, z=y, xtype="c", ytype="c", ztype="c", rounds=rounds, alpha=alpha)
+        x, y, method, z=x.copy(), xtype="c", ytype="c", ztype="c", rounds=rounds, alpha=alpha)
     az.plot_posterior(
         {f"{method}_Surrog": assocs_srg}, 
         kind="hist", 

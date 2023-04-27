@@ -56,11 +56,31 @@ def exec_surrog_indep_test(x, y, method, z=None, xtype=None, ytype=None, ztype=N
         # x_srg = x[idxs_srg]
         
         # NOTE: Bootstrap有放回等样本量采样
-        idxs_bt = random.choices(idxs, k=size_bt)
+        # idxs_bt = random.choices(idxs, k=size_bt)
         
         # 代用数据
-        x_srg, y_srg = _gen_surrog_data(idxs_bt, x), _gen_surrog_data(idxs_bt, y)
-        assoc_srg = cal_general_assoc(x_srg, y_srg, z, method, xtype, ytype, ztype, **kwargs)
+        # <<<<<<<<
+        # x_srg, y_srg = _gen_surrog_data(idxs_bt, x), _gen_surrog_data(idxs_bt, y)
+        # if z is None:
+        #     assoc_srg = cal_general_assoc(x_srg, y_srg, None, method, xtype, ytype, ztype, **kwargs)
+        # else:
+        #     assoc_srg = cal_general_assoc(x_srg, y_srg, z[idxs_bt], method, xtype, ytype, ztype, **kwargs)
+        # >>>>>>>>
+        idxs_bt = random.choices(idxs, k=size_bt)
+        x_srg = _gen_surrog_data(idxs_bt, x)
+        if z is None:
+            assoc_srg = cal_general_assoc(x_srg, y[idxs_bt], None, method, xtype, ytype, ztype, **kwargs)
+        else:
+            assoc_srg = cal_general_assoc(x_srg, y[idxs_bt], z[idxs_bt], method, xtype, ytype, ztype, **kwargs)
+        # >>>>>>>>
+        # idxs_srg = np.random.permutation(idxs)
+        # x_srg = x[idxs_srg]
+        # idxs_bt = random.choices(idxs, k=size_bt)
+        # if z is None:
+        #     assoc_srg = cal_general_assoc(x_srg[idxs_bt], y[idxs_bt], None, method, xtype, ytype, ztype, **kwargs)
+        # else:
+        #     assoc_srg = cal_general_assoc(x_srg[idxs_bt], y[idxs_bt], z[idxs_bt], method, xtype, ytype, ztype, **kwargs)
+        
         assocs_srg = np.append(assocs_srg, assoc_srg)
     
     # 计算显著性
