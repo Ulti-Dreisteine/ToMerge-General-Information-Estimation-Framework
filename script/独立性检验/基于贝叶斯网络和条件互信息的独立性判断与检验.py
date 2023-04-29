@@ -22,8 +22,8 @@ def gen_data(func: str, N: int):
     """产生数据"""
     x1 = np.random.normal(0, 1, N)
     x2 = np.random.normal(0, 1, N)
-    e1 = np.random.random(N) * 1e-6
-    e2 = np.random.random(N) * 1e-6
+    e1 = np.random.random(N) * 1e-3
+    e2 = np.random.random(N) * 1e-3
     z = np.random.normal(0, 1, N)
     
     if func == "M1":
@@ -38,6 +38,14 @@ def gen_data(func: str, N: int):
     elif func == "M4":
         x = x1 + z + e1
         y = x1 + x2 + z + e2
+    elif func == "M5":
+        x = np.sqrt(np.abs(x1 * z)) + z + e1
+        y = 0.25 * (x1 ** 2) * (x2 ** 2) + x2 + z + e2
+    elif func == "M6":
+        x = np.log(np.abs(x1 * z) + 1) + z + e1
+        y = 0.5 * (x1 ** 2 * z) + x2 + z + e2
+    else:
+        raise ValueError(f"unknown func {func}")
     
     return _normalize(x), _normalize(y), _normalize(z)
 
@@ -46,16 +54,15 @@ if __name__ == "__main__":
     
     # #### 数据可视化 ###############################################################################
     
-    funcs = ["M1", "M2", "M3", "M4"]
+    funcs = ["M1", "M2", "M3", "M4", "M5", "M6"]
     N = 1000
-    colors = ["blue", "orange", "green", "red", "grey", "cyan"]
     legends = [
         r"$z < z_{0.1}$",
         r"$z_{0.1} \leq z < z_{0.3}$", r"$z_{0.1} \leq z < z_{0.3}$",
         r"$z_{0.3} \leq z < z_{0.5}$", r"$z_{0.5} \leq z < z_{0.7}$",
         r"$z_{0.7} \leq z < z_{0.9}$", r"$z \geq z_{0.9}$"]
     
-    _, axs = plt.subplots(2, 2, figsize=(10, 10))
+    _, axs = plt.subplots(3, 2, figsize=(10, 10))
     for i, func in enumerate(funcs):
         x, y, z = gen_data(func, N)
         data = pd.DataFrame(np.c_[x, y, z], columns=["x", "y", "z"])
@@ -95,7 +102,7 @@ if __name__ == "__main__":
     rounds = 300
     alpha = 0.01
     
-    _, axs = plt.subplots(2, 2, figsize=(10, 10))
+    _, axs = plt.subplots(3, 2, figsize=(10, 10))
     for i, func in enumerate(funcs):
         x, y, z = gen_data(func, N)
         assoc, (p, indep, assocs_srg) = exec_surrog_indep_test(
