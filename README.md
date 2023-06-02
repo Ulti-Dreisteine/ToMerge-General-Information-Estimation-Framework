@@ -1,5 +1,8 @@
 ### general-information-estimation-framework（通用数据信息估计框架）
 
+### TODOs
+
+1. 继续完成: script/独立性检验/statistical_power_test.py
 
 ### 项目用途
 
