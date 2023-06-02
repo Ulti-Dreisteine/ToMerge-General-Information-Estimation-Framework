@@ -19,8 +19,7 @@ from . import cal_general_assoc
 
 def _gen_surrog_data(idxs_bt, x):
     idxs_srg = np.random.permutation(idxs_bt)
-    x_srg = x.copy()[idxs_srg]
-    return x_srg
+    return x.copy()[idxs_srg]
 
 
 def exec_surrog_indep_test(x, y, method, z=None, xtype=None, ytype=None, ztype=None, rounds=100, 
@@ -45,19 +44,19 @@ def exec_surrog_indep_test(x, y, method, z=None, xtype=None, ytype=None, ztype=N
     """
     # 计算关联系数
     assoc = cal_general_assoc(x, y, z, method, xtype, ytype, ztype, **kwargs)
-    
+
     # 计算背景值
     size_bt = len(x)
     idxs = np.arange(len(x))
     assocs_srg = np.array([])
     for _ in range(rounds):
-        
+
         # idxs_srg = np.random.permutation(idxs)
         # x_srg = x[idxs_srg]
-        
+
         # NOTE: Bootstrap有放回等样本量采样
         # idxs_bt = random.choices(idxs, k=size_bt)
-        
+
         # 代用数据
         # <<<<<<<<
         # x_srg, y_srg = _gen_surrog_data(idxs_bt, x), _gen_surrog_data(idxs_bt, y)
@@ -80,10 +79,10 @@ def exec_surrog_indep_test(x, y, method, z=None, xtype=None, ytype=None, ztype=N
         #     assoc_srg = cal_general_assoc(x_srg[idxs_bt], y[idxs_bt], None, method, xtype, ytype, ztype, **kwargs)
         # else:
         #     assoc_srg = cal_general_assoc(x_srg[idxs_bt], y[idxs_bt], z[idxs_bt], method, xtype, ytype, ztype, **kwargs)
-        
+
         assocs_srg = np.append(assocs_srg, assoc_srg)
-    
+
     # 计算显著性
     p = len(assocs_srg[assocs_srg >= assoc]) / rounds
-    indep = False if p < alpha else True  # 独立: 0, 不独立: 1
+    indep = p >= alpha
     return assoc, (p, indep, assocs_srg)
