@@ -11,6 +11,7 @@ Created on 2023/04/26 16:45:20
 @Describe: 基于代用数据的独立性测试
 """
 
+import warnings
 import random
 import numpy as np
 
@@ -23,7 +24,7 @@ def _gen_surrog_data(idxs_bt, x):
 
 
 def exec_surrog_indep_test(x, y, method, z=None, xtype=None, ytype=None, ztype=None, rounds=100, 
-                           alpha=0.05, **kwargs):
+                           alpha=0.05, max_size_bt=1000, **kwargs):
     """执行基于代用数据的独立性检验
 
     :param x: x数据, np.ndarray
@@ -35,6 +36,7 @@ def exec_surrog_indep_test(x, y, method, z=None, xtype=None, ytype=None, ztype=N
     :param ztype: y的数值类型, str, defaults to None
     :param rounds: 重复轮数, defaults to 100
     :param alpha: 显著性阈值, defaults to 0.05
+    :param max_size_bt: 用于自助重采样的最大样本数, defaults to 1000
     :param kwargs: cal_general_assoc方法中的关键字参数
     :return 
         assoc: 关联值, float
@@ -46,7 +48,12 @@ def exec_surrog_indep_test(x, y, method, z=None, xtype=None, ytype=None, ztype=N
     assoc = cal_general_assoc(x, y, z, method, xtype, ytype, ztype, **kwargs)
 
     # 计算背景值
-    size_bt = len(x)
+    if len(x) <= max_size_bt:
+        size_bt = len(x)
+    else:
+        warnings.warn("采用默认max_size_bt作为size_bt")
+        size_bt = max_size_bt
+    
     idxs = np.arange(len(x))
     assocs_srg = np.array([])
     for _ in range(rounds):
