@@ -2,7 +2,8 @@
 
 ### TODOs
 
-1. 继续完成: script/独立性检验/statistical_power_test.py
+1. ~~继续完成: script/独立性检验/statistical_power_test.py~~
+2. scipt/时延关联检测/main.py中背景值较高, 与代用数据计算结果不吻合
 
 ### 项目用途
 
@@ -31,8 +32,15 @@
                 |-- cmi.py      # 条件互信息估计
 
     |-- statistical_significance
-        |-- bootstrap       # 基于等量有放回自举的关联度量
-        |-- surrog_indep    # 基于代用数据的独立性检验
+        |-- bootstrap_coeff.py      # 基于等量有放回自举的关联度量
+        |-- surrog_indep_test.py    # 基于代用数据的独立性检验
+
+    |-- script
+        |-- 独立性检验
+            |-- indep_test.py               # 独立性检验
+            |-- statistical_power_test.py   # 统计效能测试
+        |-- 条件独立性检验
+            |-- cond_indep_test.py          # 条件独立性检验
 
 ```
 

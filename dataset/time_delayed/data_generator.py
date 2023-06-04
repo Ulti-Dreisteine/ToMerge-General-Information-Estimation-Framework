@@ -20,9 +20,10 @@ __doc__ = """
 import numpy as np
 
 
-def gen_data(rounds: int):
+def gen_four_species(N: int):
+    """生成四种群系统样本"""
     X = np.ones(4).reshape(1, -1) * 0.4
-    for i in range(rounds):
+    for i in range(N):
         x = X[i, :].copy()
         x_new = [
             x[0] * (3.9 - 3.9 * x[0]),
@@ -43,9 +44,9 @@ if __name__ == "__main__":
     
     from setting import plt
     
-    rounds = 5000
+    N = 5000
 
-    X = gen_data(rounds)
+    X = gen_four_species(N)
     
     D = X.shape[1]
     plt.figure()

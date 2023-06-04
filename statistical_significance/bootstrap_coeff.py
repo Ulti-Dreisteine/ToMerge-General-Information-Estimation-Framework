@@ -29,7 +29,7 @@ def cal_bootstrap_coeff(x, y, method, z=None, xtype=None, ytype=None, ztype=None
     :param ytype: y的值类型, 参见estimate.__init__, str, defaults to None
     :param ztype: z的值类型, 参见estimate.__init__, str, defaults to None
     :param rounds: Bootstrap轮数, int, defaults to 100
-    :return: assoc_mean: 均值, assocs_bt: 随机结果
+    :return: assoc_mean: 均值, assocs_bt: 随机测试后获得的所有关联值结果
     """    
     assocs_bt = np.array([])
     idxs = np.arange(len(x))
