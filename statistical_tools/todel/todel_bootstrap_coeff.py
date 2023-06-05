@@ -14,7 +14,7 @@ Created on 2023/04/26 15:24:07
 import numpy as np
 import random
 
-from . import cal_general_assoc
+from .. import cal_general_assoc
 
 
 def cal_bootstrap_coeff(x, y, method, z=None, xtype=None, ytype=None, ztype=None, rounds=100, 

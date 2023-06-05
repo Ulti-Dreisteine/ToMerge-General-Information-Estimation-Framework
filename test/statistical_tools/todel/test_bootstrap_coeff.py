@@ -7,7 +7,7 @@ BASE_DIR = os.path.abspath(os.path.join(os.path.abspath(__file__), "../" * 3))
 sys.path.insert(0, BASE_DIR)
 
 from setting import plt
-from statistical_significance.bootstrap_coeff import cal_bootstrap_coeff
+from statistical_tools.bootstrap_coeff import cal_bootstrap_coeff
 
 
 def gen_data():

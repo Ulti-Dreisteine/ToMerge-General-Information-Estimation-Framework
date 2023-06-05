@@ -1,9 +1,7 @@
 import numpy as np
 
 
-# ---- 时延数据构造 ---------------------------------------------------------------------------------
-
-def gen_time_delayed_series(x: np.ndarray, y: np.ndarray, tau: int, max_len: int = 5000):
+def build_td_series(x: np.ndarray, y: np.ndarray, tau: int, max_len: int = 5000):
     """
     生成时延序列样本
     :param x: 样本x数组
@@ -35,10 +33,3 @@ def gen_time_delayed_series(x: np.ndarray, y: np.ndarray, tau: int, max_len: int
         x_td, y_td = x_td[idxs], y_td[idxs]
 
     return x_td, y_td
-
-
-# ---- 代用数据构造 ---------------------------------------------------------------------------------
-
-def gen_surrog_data(idxs_bt, x):
-    idxs_srg = np.random.permutation(idxs_bt)
-    return x.copy()[idxs_srg]

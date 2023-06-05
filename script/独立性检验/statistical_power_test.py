@@ -25,7 +25,7 @@ sys.path.insert(0, BASE_DIR)
 
 from setting import plt
 from dataset.bivariate.data_generator import DataGenerator
-from statistical_significance.surrog_indep_test import exec_surrog_indep_test
+from statistical_tools.surrog_indep_test import exec_surrog_indep_test
 
 
 def gen_test_data(func, N, scale):

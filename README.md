@@ -3,7 +3,8 @@
 ### TODOs
 
 1. ~~继续完成: script/独立性检验/statistical_power_test.py~~
-2. scipt/时延关联检测/main.py中背景值较高, 与代用数据计算结果不吻合
+2. ~~scipt/时延关联检测/main.py中背景值较高, 与代用数据计算结果不吻合~~
+3. statistital_significance/surrog_indep_test.py中通过随机抽样获得关联值分布
 
 ### 项目用途
 
@@ -32,7 +33,7 @@
                 |-- cmi.py      # 条件互信息估计
 
     |-- statistical_significance
-        |-- bootstrap_coeff.py      # 基于等量有放回自举的关联度量
+        |-- (deprecated) bootstrap_coeff.py      # 基于等量有放回自举的关联度量
         |-- surrog_indep_test.py    # 基于代用数据的独立性检验
 
     |-- script
@@ -67,7 +68,7 @@ subgraph estimate
 end
 
 subgraph statistical_significance
-    cal_general_assoc --> bootstrap_coeff & surrg_indep_test
+    cal_general_assoc --> surrg_indep_test
 end
 
 estimate --cal_assoc & cal_cond_assoc--> cal_general_assoc
