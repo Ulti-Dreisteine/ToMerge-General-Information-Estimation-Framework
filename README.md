@@ -32,9 +32,10 @@
                 |-- mi.py       # 互信息估计
                 |-- cmi.py      # 条件互信息估计
 
-    |-- statistical_significance
-        |-- (deprecated) bootstrap_coeff.py      # 基于等量有放回自举的关联度量
-        |-- surrog_indep_test.py    # 基于代用数据的独立性检验
+    |-- statistical_tools
+        |-- (deprecated) bootstrap_coeff.py     # 基于等量有放回自举的关联度量
+        |-- surrog_indep_test.py                # 基于代用数据的关联度量和独立性检验
+        |-- time_delayed_association.py         # 时延关联检测
 
     |-- script
         |-- 独立性检验
@@ -42,8 +43,11 @@
             |-- statistical_power_test.py   # 统计效能测试
         |-- 条件独立性检验
             |-- cond_indep_test.py          # 条件独立性检验
+        |-- 时延关联检测
 
 ```
+
+代码文件依赖关系：
 
 ```mermaid
 flowchart LR
@@ -67,8 +71,9 @@ subgraph estimate
     end
 end
 
-subgraph statistical_significance
-    cal_general_assoc --> surrg_indep_test
+subgraph statistical_tools
+    cal_general_assoc --> surrog_indep_test
+    surrog_indep_test --> time_delayed_assocication
 end
 
 estimate --cal_assoc & cal_cond_assoc--> cal_general_assoc
