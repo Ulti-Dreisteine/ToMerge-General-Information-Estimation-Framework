@@ -29,3 +29,7 @@ mod/logs/
 trash/
 *.pyc
 tmp/
+
+build/
+giefstat.egg-info/
+dist/

@@ -1,53 +1,55 @@
-### general-information-estimation-framework（通用数据信息估计框架）
+### general-information-estimation-framework
 
 ### TODOs
 
-1. ~~继续完成: script/独立性检验/statistical_power_test.py~~
+1. ~~script/独立性检验/statistical_power_test.py~~
 2. ~~scipt/时延关联检测/main.py中背景值较高, 与代用数据计算结果不吻合~~
 3. statistital_significance/surrog_indep_test.py中通过随机抽样获得关联值分布
 
-### 项目用途
+### Project Purpose
 
-用于计算任意两个或多个一元或多元、连续或离散变量之间的相关、关联以及其他更高阶的数据信息关系
+This project aims for:
+1. computing higher-order information interactions between differen types (discrete & continuous) of variables
+2. uncovering complex associations and causal relationships in high-dimensional data
 
-### 项目结构
+### Project Structure
 
 ```
 |-- general-information-estimation-framework
-    |-- estimate            # 各类基于K近邻、KDE、离散化、MIC和模型等的相关、关联和数据信息估计算法
-        |-- __init__.py     # 默认顶层方法
-        |-- setting.py      # NOTE, 设置: 变量类型为离散"d"和连续"c"; 信息估计的对数底数为e
-        |-- util.py         # 通用工具: 数据标准化、离散化、K近邻查询、球体积计算
-        |-- _univar_encoding.py     # 一维变量编码
-        |-- gief            # 创新点, 不同类型变量通用数据信息估计: 边际熵、条件熵、互信息、条件互信息
+    |-- estimate            # information estimation base on KNN, KDE, etc.
+        |-- __init__.py     
+        |-- setting.py      # NOTE var types: "d" for discrete and "c" for continuous
+        |-- util.py
+        |-- _univar_encoding.py     # encoding one-dimensional variable data
+        |-- gief            # general information estimation
             __init__.py
-            |-- entropy     # 条件熵和边际熵
+            |-- entropy     # marginal and conditional entropies
                 |-- __init__.py
                 |-- cond_entropy.py
                 |-- marg_entropy.py
-            |-- mutual_info     # 互信息
+            |-- mutual_info
                 |-- __init__.py
-                |-- _kraskov.py # 基于Kraskov的K近邻信息估计
-                |-- _ross.py    # 基于Ross的K近邻信息估计
-                |-- mi.py       # 互信息估计
-                |-- cmi.py      # 条件互信息估计
+                |-- _kraskov.py # KNN estimation proposed by Kraskov et al.
+                |-- _ross.py    # proposed by Ross
+                |-- mi.py       # mutual information estimation
+                |-- cmi.py      # conditional mutual information estimation
 
     |-- statistical_tools
-        |-- (deprecated) bootstrap_coeff.py     # 基于等量有放回自举的关联度量
-        |-- surrog_indep_test.py                # 基于代用数据的关联度量和独立性检验
-        |-- time_delayed_association.py         # 时延关联检测
+        |-- (deprecated) bootstrap_coeff.py     # association measure based on bootstrap test
+        |-- surrog_indep_test.py                # association measure and independence test based on surrogate data
+        |-- time_delayed_association.py         # time delayed association detection
 
     |-- script
         |-- 独立性检验
-            |-- indep_test.py               # 独立性检验
-            |-- statistical_power_test.py   # 统计效能测试
+            |-- indep_test.py               # independence test
+            |-- statistical_power_test.py   # statistical power test
         |-- 条件独立性检验
-            |-- cond_indep_test.py          # 条件独立性检验
+            |-- cond_indep_test.py          # conditional independence test
         |-- 时延关联检测
 
 ```
 
-代码文件依赖关系：
+file dependency plot：
 
 ```mermaid
 flowchart LR
@@ -78,4 +80,12 @@ end
 
 estimate --cal_assoc & cal_cond_assoc--> cal_general_assoc
 ```
+
+### References
+
+1. A. Kraskov, H. Stoegbauer, P. Grassberger: Estimating Mutual Information. Physical Review E, 2003.
+2. D. Lombardi, S. Pant: A Non-Parametric K-Nearest Neighbor Entropy Estimator. Physical Review E, 2015.
+3. B. C. Ross: Mutual Information between Discrete and Continuous Data Sets. PLoS One, 2014.
+4. https://github.com/dizcza/entropy-estimators
+5. https://github.com/danielhomola/mifs
 
