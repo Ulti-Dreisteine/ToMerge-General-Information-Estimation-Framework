@@ -9,7 +9,7 @@
 ### Project Purpose
 
 This project aims for:
-1. computing higher-order information interactions between differen types (discrete & continuous) of variables
+1. computing higher-order information interactions between different types (discrete & continuous) of variables
 2. uncovering complex associations and causal relationships in high-dimensional data
 
 ### Project Structure

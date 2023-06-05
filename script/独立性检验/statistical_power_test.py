@@ -25,7 +25,7 @@ sys.path.insert(0, BASE_DIR)
 
 from setting import plt
 from dataset.bivariate.data_generator import DataGenerator
-from statistical_tools.surrog_indep_test import exec_surrog_indep_test
+from giefstat.statistical_tools.surrog_indep_test import exec_surrog_indep_test
 
 
 def gen_test_data(func, N, scale):
@@ -105,7 +105,7 @@ if __name__ == "__main__":
             linewidth=0,
             antialiased=True)
         # ax.set_title(f"dataset: {func}", fontsize=16)
-        ax.set_xlabel("noise scale $\sigma$", fontsize=14)
+        ax.set_xlabel("noise scale $\\sigma$", fontsize=14)
         ax.set_ylabel("sample size $N$", fontsize=14)
         ax.set_zlabel("assoc rate detected", fontsize=14)
         ax.text(0, 0, np.max(values) * 1.5 - 0.5 * np.min(values), func, fontsize=16)

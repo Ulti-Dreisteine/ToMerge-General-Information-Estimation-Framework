@@ -5,7 +5,7 @@ import os
 BASE_DIR = os.path.abspath(os.path.join(os.path.abspath(__file__), "../" * 3))
 sys.path.insert(0, BASE_DIR)
 
-from estimate.quant_based import MutualInfoClassic, MutualInfoDarbellay
+from giefstat.estimate.quant_based import MutualInfoClassic, MutualInfoDarbellay
 
 
 # ---- 测试经典估计方法 ------------------------------------------------------------------------------

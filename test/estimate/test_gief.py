@@ -5,7 +5,7 @@ import os
 BASE_DIR = os.path.abspath(os.path.join(os.path.abspath(__file__), "../" * 3))
 sys.path.insert(0, BASE_DIR)
 
-from estimate.gief import MargEntropy, CondEntropy, MutualInfoGIEF, CondMutualInfoGIEF
+from giefstat.estimate.gief import MargEntropy, CondEntropy, MutualInfoGIEF, CondMutualInfoGIEF
 
 
 # ---- 边际熵 --------------------------------------------------------------------------------------

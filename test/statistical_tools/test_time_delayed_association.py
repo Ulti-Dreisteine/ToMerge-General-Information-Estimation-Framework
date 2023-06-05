@@ -6,7 +6,7 @@ BASE_DIR = os.path.abspath(os.path.join(os.path.abspath(__file__), "../" * 3))
 sys.path.insert(0, BASE_DIR)
 
 from setting import plt
-from statistical_tools.time_delayed_association import detect_time_delayed_assoc
+from giefstat.statistical_tools.time_delayed_association import detect_time_delayed_assoc
 
 # ---- 载入测试数据 -----------------------------------------------------------------------------
 

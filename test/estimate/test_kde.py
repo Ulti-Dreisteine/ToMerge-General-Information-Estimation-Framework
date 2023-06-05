@@ -18,7 +18,7 @@ import os
 BASE_DIR = os.path.abspath(os.path.join(os.path.abspath(__file__), "../" * 3))
 sys.path.insert(0, BASE_DIR)
 
-from estimate.kde.kde import MargEntropy, MutualInfoKDE
+from giefstat.estimate.kde.kde import MargEntropy, MutualInfoKDE
 
 x = np.random.normal(0, 1, 1000)
 y = np.random.normal(0, 1, 1000)
