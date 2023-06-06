@@ -21,14 +21,9 @@ __doc__ = """
 
 from sklearn.metrics import f1_score as cal_f1, r2_score as cal_r2
 import numpy as np
-import sys
-import os
 
-BASE_DIR = os.path.abspath(os.path.join(os.path.abspath(__file__), "../" * 3))
-sys.path.insert(0, BASE_DIR)
-
-from estimate.setting import DTYPES
-from estimate.util import stdize_values
+from ...setting import DTYPES
+from ...util import stdize_values
 
 
 def _cal_metric(y_true, y_pred, ytype):
@@ -96,43 +91,43 @@ class CondMutualInfoModel(object):
             self.x_norm, self.y_norm.flatten(), self.ytype, model, test_ratio, self.z_norm)
         
 
-if __name__ == "__main__":
-    def test_mi():
-        x = np.random.normal(0, 1, 10000)
-        y = np.random.randint(0, 5, 10000)
+# if __name__ == "__main__":
+#     def test_mi():
+#         x = np.random.normal(0, 1, 10000)
+#         y = np.random.randint(0, 5, 10000)
         
-        self = MutualInfoModel(x, "c", y, "d")
+#         self = MutualInfoModel(x, "c", y, "d")
     
-        from lightgbm import LGBMClassifier as LightGBM
-        model = LightGBM(
-            n_estimators=100,
-            max_depth=3,
-            boosting_type="goss",
-            learning_rate=0.1,
-            importance_type="split",
-            n_jobs=3,
-        )
+#         from lightgbm import LGBMClassifier as LightGBM
+#         model = LightGBM(
+#             n_estimators=100,
+#             max_depth=3,
+#             boosting_type="goss",
+#             learning_rate=0.1,
+#             importance_type="split",
+#             n_jobs=3,
+#         )
     
-        print(f"mi = {self(model)}")
+#         print(f"mi = {self(model)}")
     
-    def test_cmi():
-        x = np.random.normal(0, 1, 10000)
-        y = np.random.normal(0, 1, 10000)
-        z = np.random.normal(0, 1, 10000)
+#     def test_cmi():
+#         x = np.random.normal(0, 1, 10000)
+#         y = np.random.normal(0, 1, 10000)
+#         z = np.random.normal(0, 1, 10000)
         
-        self = CondMutualInfoModel(x, "c", y, "c", z, "c")
+#         self = CondMutualInfoModel(x, "c", y, "c", z, "c")
 
-        from lightgbm import LGBMRegressor as LightGBM
-        model = LightGBM(
-            n_estimators=100,
-            max_depth=3,
-            boosting_type="goss",
-            learning_rate=0.1,
-            importance_type="split",
-            n_jobs=3,
-        )
+#         from lightgbm import LGBMRegressor as LightGBM
+#         model = LightGBM(
+#             n_estimators=100,
+#             max_depth=3,
+#             boosting_type="goss",
+#             learning_rate=0.1,
+#             importance_type="split",
+#             n_jobs=3,
+#         )
 
-        print(f"cmi = {self(model)}")
+#         print(f"cmi = {self(model)}")
         
-    test_mi()  # todo 分类问题算得关联值下限不为0
-    test_cmi()
+#     test_mi()  # todo 分类问题算得关联值下限不为0
+#     test_cmi()

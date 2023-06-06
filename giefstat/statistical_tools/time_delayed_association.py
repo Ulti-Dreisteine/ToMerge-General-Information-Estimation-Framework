@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import logging
 
-from .util import build_td_series
+from ..util import build_td_series
 from .surrog_indep_test import exec_surrog_indep_test
 
 

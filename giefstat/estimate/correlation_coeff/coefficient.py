@@ -15,14 +15,8 @@ Created on 2022/08/24 22:44:39
 from scipy.stats import pearsonr, spearmanr
 import numpy as np
 import dcor
-import sys
-import os
 
-BASE_DIR = os.path.abspath(os.path.join(os.path.abspath(__file__), "../" * 2))
-sys.path.insert(0, BASE_DIR)
-
-from _univar_encoding import SuperCategorEncoding
-# from mic import PairwiseMIC, PairwiseRMIC
+from ...util import SuperCategorEncoding
 
 
 def cal_dist_corr(x, y, x_type: str="c"):

@@ -1,18 +1,14 @@
 import numpy as np
-import sys
-import os
 
-BASE_DIR = os.path.abspath(os.path.join(os.path.abspath(__file__), "../" * 1))
-sys.path.insert(0, BASE_DIR)
+from ..setting import DTYPES
 
-from gief import MutualInfoGIEF, CondMutualInfoGIEF, MargEntropy, CondEntropy
-from kde import MutualInfoKDE
-from mic import MIC, CMIC
-from model_based import MutualInfoModel, CondMutualInfoModel
-from quant_based import MutualInfoClassic, MutualInfoDarbellay
-from other import cal_dist_corr, cal_pearson_corr, cal_spearman_corr
+from .gief import MutualInfoGIEF, CondMutualInfoGIEF, MargEntropy, CondEntropy
+from .kde import MutualInfoKDE
+from .mic import MIC, CMIC
+from .model_based import MutualInfoModel, CondMutualInfoModel
+from .quant_based import MutualInfoClassic, MutualInfoDarbellay
+from .correlation_coeff import cal_dist_corr, cal_pearson_corr, cal_spearman_corr
 
-DTYPES = ["d", "c"]
 ASSOC_METHODS = [
     "PearsonCorr", "SpearmanCorr", "DistCorr",
     "MI-GIEF", "MI-model", "MI-cut", "MI-qcut", "MI-Darbellay", "MI-KDE",

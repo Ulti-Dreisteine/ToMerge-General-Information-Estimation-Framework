@@ -1,12 +1,7 @@
 import numpy as np
-import sys
-import os
 
-BASE_DIR = os.path.abspath(os.path.join(os.path.abspath(__file__), "../" * 2))
-sys.path.insert(0, BASE_DIR)
-
-from util import stdize_values
-from quant_based._quant_darbellay import exec_partition, Cell
+from ...util import stdize_values
+from ._quant_darbellay import exec_partition, Cell
 
 
 class MutualInfoDarbellay(object):
@@ -45,11 +40,11 @@ class MutualInfoDarbellay(object):
         return mi
     
 
-if __name__ == "__main__":
+# if __name__ == "__main__":
     
-    def test_cc():
-        x = np.random.normal(0, 1, 10000)
-        y = np.random.normal(0, 1, 10000)
-        print(f"mi = {MutualInfoDarbellay(x, y)()}")
+#     def test_cc():
+#         x = np.random.normal(0, 1, 10000)
+#         y = np.random.normal(0, 1, 10000)
+#         print(f"mi = {MutualInfoDarbellay(x, y)()}")
         
-    test_cc()
+#     test_cc()

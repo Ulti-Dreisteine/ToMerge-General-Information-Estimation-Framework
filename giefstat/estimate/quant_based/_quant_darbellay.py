@@ -1,16 +1,11 @@
-# import matplotlib.pyplot as plt
 from typing import List
 import numpy as np
-import sys
-import os
 
-BASE_DIR = os.path.abspath(os.path.join(os.path.abspath(__file__), "../" * 2))
-sys.path.insert(0, BASE_DIR)
+from ...util import stdize_values
 
 if "plt" not in dir():
     import matplotlib.pyplot as plt
     
-from util import stdize_values
 
 
 def cal_area(bounds: List[tuple], D) -> float:
@@ -114,13 +109,12 @@ class Cell(object):
         cell_lr.def_cell_bounds_cal_area([(x_thres, xu), (yl, y_thres)])
         return cell_ul, cell_ur, cell_ll, cell_lr
     
-    def show(self, N_total: int, pdf_ub: float=1e4, linewidth: float = 0.5):
+    def show(self, linewidth: float = 0.5):
         (xl, xu), (yl, yu) = self.bounds
-        # plt.fill_between([xl, xu], [yl, yl], [yu, yu], alpha=self.cal_proba_dens(N_total) / pdf_ub, facecolor="grey")
-        plt.plot([xl, xu], [yl, yl], '-', c='k', linewidth=linewidth)
-        plt.plot([xu, xu], [yl, yu], '-', c='k', linewidth=linewidth)
-        plt.plot([xu, xl], [yu, yu], '-', c='k', linewidth=linewidth)
-        plt.plot([xl, xl], [yu, yl], '-', c='k', linewidth=linewidth)
+        plt.plot([xl, xu], [yl, yl], "-", c="k", linewidth=linewidth)
+        plt.plot([xu, xu], [yl, yu], "-", c="k", linewidth=linewidth)
+        plt.plot([xu, xl], [yu, yu], "-", c="k", linewidth=linewidth)
+        plt.plot([xl, xl], [yu, yl], "-", c="k", linewidth=linewidth)
         
 
 # 递归离散化.

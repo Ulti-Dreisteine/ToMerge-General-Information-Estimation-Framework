@@ -12,13 +12,12 @@ Created on 2021/08/07 16:38:23
 @Describe: 使用Kraskov方法计算互信息
 """
 
-import warnings
-
-import numpy as np
+from sklearn.neighbors import BallTree, KDTree
+from scipy.special import digamma
 import numpy.linalg as la
 from numpy import log
-from scipy.special import digamma
-from sklearn.neighbors import BallTree, KDTree
+import numpy as np
+import warnings
 
 __doc__ = """
     （补充文献）

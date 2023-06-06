@@ -12,15 +12,9 @@ Created on 2022/09/18 23:21:37
 """
 
 import numpy as np
-import sys
-import os
 
-BASE_DIR = os.path.abspath(os.path.join(os.path.abspath(__file__), "../" * 2))
-sys.path.insert(0, BASE_DIR)
-
-from _mic_rmic import MaximalInfoCoeff, RefinedMaximalInfoCoeff
-from _univar_encoding import SuperCategorEncoding
-from util import discretize_arr
+from ...util import SuperCategorEncoding, discretize_arr
+from ._mic_rmic import MaximalInfoCoeff, RefinedMaximalInfoCoeff
 
 
 # ---- 数据压缩编码 ---------------------------------------------------------------------------------
@@ -60,18 +54,12 @@ class MIC(object):
         # 多维数组逐列离散化, 并合并编码压缩为一维数组
         # todo 优化此处离散化编码处理, 能否确定y顺序?
         y = _reencode(self.y) if self.y.shape[1] > 1 else self.y.copy()
-        
-        if self.x.shape[1] > 1:
-            x = _reencode(self.x)
-        else:
-            x = self.x.copy()
-            
-        if method == "rmic":
-            if encode:
-                x = SuperCategorEncoding(x, y).encode(method="mhg") # 进行有监督编码, NOTE x值需为int
-            return RefinedMaximalInfoCoeff(x, y).cal_assoc()
-        else:
+        x = _reencode(self.x) if self.x.shape[1] > 1 else self.x.copy()
+        if method != "rmic":
             return MaximalInfoCoeff(x, y).cal_assoc()
+        if encode:
+            x = SuperCategorEncoding(x, y).encode(method="mhg") # 进行有监督编码, NOTE x值需为int
+        return RefinedMaximalInfoCoeff(x, y).cal_assoc()
             
             
 class CMIC(object):

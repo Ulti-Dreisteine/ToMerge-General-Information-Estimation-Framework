@@ -1,13 +1,8 @@
 from pyitlib import discrete_random_variable as drv
 import pandas as pd
 import numpy as np
-import sys
-import os
 
-BASE_DIR = os.path.abspath(os.path.join(os.path.abspath(__file__), "../" * 2))
-sys.path.insert(0, BASE_DIR)
-
-from util import stdize_values
+from ...util import stdize_values
 
 
 def discretize_series(x: np.ndarray, n: int = None, method="qcut"):
@@ -44,18 +39,18 @@ class MutualInfoClassic(object):
         return float(cmi)  # NOTE: drv.infor_mutual_cond居然返回array格式
     
 
-if __name__ == "__main__":
+# if __name__ == "__main__":
     
-    def test_cc():
-        x = np.random.normal(0, 1, 100000)
-        y = np.random.normal(0, 1, 100000)
-        print(f"mi = {MutualInfoClassic(x, y)()}")
+#     def test_cc():
+#         x = np.random.normal(0, 1, 100000)
+#         y = np.random.normal(0, 1, 100000)
+#         print(f"mi = {MutualInfoClassic(x, y)()}")
         
-    def test_ccc():
-        x = np.random.normal(0, 1, 100000)
-        y = np.random.normal(0, 1, 100000)
-        z = np.random.normal(0, 1, 100000)
-        print(f"cmi = {MutualInfoClassic(x, y, z)()}")
+#     def test_ccc():
+#         x = np.random.normal(0, 1, 100000)
+#         y = np.random.normal(0, 1, 100000)
+#         z = np.random.normal(0, 1, 100000)
+#         print(f"cmi = {MutualInfoClassic(x, y, z)()}")
         
-    test_cc()
-    test_ccc()
+#     test_cc()
+#     test_ccc()

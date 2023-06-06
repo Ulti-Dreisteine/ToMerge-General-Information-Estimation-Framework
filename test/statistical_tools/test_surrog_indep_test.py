@@ -24,10 +24,6 @@ from giefstat.statistical_tools.surrog_indep_test import exec_surrog_indep_test
 from dataset.bivariate.data_generator import DataGenerator
 
 
-# def _normalize(x):
-#     return (x - np.min(x)) / (np.max(x) - np.min(x))
-
-
 def gen_test_data(func, N, scale):
     data_gener = DataGenerator()
     x, y, _, _ = data_gener.gen_data(N, func, normalize=False)

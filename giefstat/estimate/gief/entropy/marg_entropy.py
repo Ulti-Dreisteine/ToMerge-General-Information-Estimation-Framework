@@ -32,14 +32,9 @@ __doc__ = """
 from scipy.special import psi
 from numpy import log
 import numpy as np
-import sys
-import os
 
-BASE_DIR = os.path.abspath(os.path.join(os.path.abspath(__file__), "../" * 4))
-sys.path.insert(0, BASE_DIR)
-
-from estimate.setting import DTYPES, BASE
-from estimate.util import stdize_values, build_tree, query_neighbors_dist, get_unit_ball_volume
+from ....util import stdize_values, build_tree, query_neighbors_dist, get_unit_ball_volume
+from ....setting import DTYPES, BASE
 
 
 def _cal_discrete_entropy(x):
@@ -53,11 +48,10 @@ def _cal_kl_entropy(x, k, metric="chebyshev"):
     assert k <= len(x) - 1
     N, D = x.shape
     
-    # 构建距离树.
+    # 构建距离树
     tree = build_tree(x, "chebyshev")
 
-    # 计算结果.
-    # 参见Kraskov, et al. Estimating Mutual Information, 2004. Eq. (20).
+    # 计算结果
     nn_distc = query_neighbors_dist(tree, x, k)  # 获得了各样本第k近邻的距离
     v = get_unit_ball_volume(D, metric)
     return (-psi(k) + psi(N) + np.log(v) + D * np.log(nn_distc).mean())

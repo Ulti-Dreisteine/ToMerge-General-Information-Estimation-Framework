@@ -1,10 +1,4 @@
-import sys
-import os
-
-BASE_DIR = os.path.abspath(os.path.join(os.path.abspath(__file__), "../" * 2))
-sys.path.insert(0, BASE_DIR)
-
-from estimate import cal_assoc, cal_cond_assoc
+from ..estimate import cal_assoc, cal_cond_assoc
 
 __all__ = ["cal_general_assoc"]
 

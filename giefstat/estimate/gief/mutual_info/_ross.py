@@ -1,14 +1,8 @@
 from scipy.special import psi
-import numpy as np
 from numpy import log
-import sys
-import os
+import numpy as np
 
-BASE_DIR = os.path.abspath(os.path.join(os.path.abspath(__file__), "../" * 3))
-sys.path.insert(0, BASE_DIR)
-
-# from mod.data_process.numpy import compress_z_data
-from util import build_tree, query_neighbors_dist
+from ....util import build_tree, query_neighbors_dist
 
 
 # ---- 高维数据压缩, 计算互信息时要用. ----------------------------------------------------------------

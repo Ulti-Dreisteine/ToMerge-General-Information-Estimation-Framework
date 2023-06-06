@@ -12,18 +12,13 @@ Created on 2022/09/18 16:32:51
 """
 
 import numpy as np
-import sys
-import os
 
-BASE_DIR = os.path.abspath(os.path.join(os.path.abspath(__file__), "../" * 3))
-sys.path.insert(0, BASE_DIR)
-
-from estimate.setting import DTYPES, BASE
-from estimate.util import stdize_values
-from ._kraskov import kraskov_mi as cal_kraskov_cmi
-from .mi import MutualInfoGIEF
+from ....util import stdize_values
+from ....setting import DTYPES, BASE
 from ..entropy.cond_entropy import CondEntropy
 from ..entropy.marg_entropy import MargEntropy
+from ._kraskov import kraskov_mi as cal_kraskov_cmi
+from .mi import MutualInfoGIEF
 
 
 class CondMutualInfoGIEF(object):

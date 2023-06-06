@@ -13,17 +13,12 @@ Created on 2022/09/18 15:52:28
 
 from numpy import log
 import numpy as np
-import sys
-import os
 
-BASE_DIR = os.path.abspath(os.path.join(os.path.abspath(__file__), "../" * 4))
-sys.path.insert(0, BASE_DIR)
-
-from estimate.setting import DTYPES, BASE
-from estimate.util import stdize_values
+from ....util import stdize_values
+from ....setting import DTYPES, BASE
+from ..entropy.marg_entropy import MargEntropy
 from ._kraskov import kraskov_mi as cal_kraskov_mi
 from ._ross import cal_ross_mi
-from ..entropy.marg_entropy import MargEntropy
 
 
 def _cal_mi_cc(x, y, k):
