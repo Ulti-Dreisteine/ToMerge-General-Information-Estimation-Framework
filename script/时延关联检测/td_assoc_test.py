@@ -34,5 +34,5 @@ if __name__ == "__main__":
     # ---- 时延关联检测 -----------------------------------------------------------------------------
 
     taus = np.arange(-20, 20, 1)
-    _ = detect_time_delayed_assoc(x, y, taus, show=True, alpha=0.01, rounds=10)
+    _ = detect_time_delayed_assoc(x, y, taus, show=True, alpha=0.01, rounds=100)
     
