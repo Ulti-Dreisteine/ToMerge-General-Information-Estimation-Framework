@@ -68,7 +68,8 @@ This project aims for:
         |   |-- cond_indep_test.py          # 条件独立性检验测试
         |
         |-- 时延关联检测
-            |-- td_assoc_test.py            # 时延关联检测测试
+            |-- four_species_test.ipynb     # 四种群时延关联检测测试
+            |-- four_siso_test.ipynb        # 四SISO系统时延关联检测测试
 
 ```
 
