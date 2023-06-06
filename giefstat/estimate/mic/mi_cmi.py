@@ -52,13 +52,14 @@ class MIC(object):
     
     def __call__(self, method="rmic", encode=True):
         # 多维数组逐列离散化, 并合并编码压缩为一维数组
-        # todo 优化此处离散化编码处理, 能否确定y顺序?
         y = _reencode(self.y) if self.y.shape[1] > 1 else self.y.copy()
         x = _reencode(self.x) if self.x.shape[1] > 1 else self.x.copy()
         if method != "rmic":
             return MaximalInfoCoeff(x, y).cal_assoc()
-        if encode:
+        
+        if encode & isinstance(x, int):
             x = SuperCategorEncoding(x, y).encode(method="mhg") # 进行有监督编码, NOTE x值需为int
+            
         return RefinedMaximalInfoCoeff(x, y).cal_assoc()
             
             

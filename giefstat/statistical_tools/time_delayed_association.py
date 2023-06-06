@@ -66,16 +66,16 @@ def detect_time_delayed_assoc(x, y, taus, xtype="c", ytype="c", max_size_bt=1000
         
     # 显示结果, 红色点表示显著
     if show:
-        _show_results(taus, td_assocs, td_indeps)
+        _show_results(taus, td_assocs, td_indeps, method)
         
     return td_assocs, td_indeps
         
 
-def _show_results(taus, td_assocs, td_indeps):
+def _show_results(taus, td_assocs, td_indeps, method):
     plt.figure()
     plt.scatter(
         taus, td_assocs, edgecolors=["k" if p==1 else "r" for p in td_indeps], c="w", lw=2, zorder=1)
     plt.plot(taus, td_assocs, c="k", lw=1.5, zorder=0)
     plt.grid(alpha=0.3, zorder=-1)
     plt.xlabel("$\\tau$")
-    plt.ylabel("MI")
+    plt.ylabel(method)
