@@ -1,5 +1,9 @@
 ### general-information-estimation-framework (GIEF)
 
+### Package Info
+
+https://pypi.org/search/?q=giefstat
+
 ### Project Purpose
 
 This project aims for:
