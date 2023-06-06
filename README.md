@@ -6,7 +6,7 @@ https://pypi.org/search/?q=giefstat
 
 ### Project Purpose
 
-This project aims for:
+This project aims to lay a basis for:
 1. computing higher-order information interactions between different types (discrete & continuous) of variables
 2. uncovering complex associations and causal relationships in high-dimensional data
 
