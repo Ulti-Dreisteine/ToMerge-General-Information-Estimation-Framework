@@ -5,6 +5,7 @@
 1. ~~script/独立性检验/statistical_power_test.py~~
 2. ~~scipt/时延关联检测/main.py中背景值较高, 与代用数据计算结果不吻合~~
 3. statistital_significance/surrog_indep_test.py中通过随机抽样获得关联值分布
+4. 继续estimate中mic及剩下的部分封装测试
 
 ### Project Purpose
 
