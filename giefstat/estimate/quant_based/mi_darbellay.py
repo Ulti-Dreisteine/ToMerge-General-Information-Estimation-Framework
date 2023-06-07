@@ -8,6 +8,7 @@ class MutualInfoDarbellay(object):
     """基于Darbellay自适应分箱的互信息计算"""
     
     def __init__(self, x: np.ndarray, y: np.ndarray):
+        # NOTE: 由于本项目中的Darbellay离散化算法设置, 需要对变量数据进行标准化至0-1区间
         self.x_norm = stdize_values(x, "c")
         self.y_norm = stdize_values(y, "c")
         try:
