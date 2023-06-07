@@ -57,7 +57,7 @@ class MIC(object):
         if method != "rmic":
             return MaximalInfoCoeff(x, y).cal_assoc()
         
-        if encode & isinstance(x, int):
+        if encode:
             x = SuperCategorEncoding(x, y).encode(method="mhg") # 进行有监督编码, NOTE x值需为int
             
         return RefinedMaximalInfoCoeff(x, y).cal_assoc()
