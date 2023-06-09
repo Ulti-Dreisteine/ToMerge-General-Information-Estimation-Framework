@@ -4,6 +4,11 @@
 
 https://pypi.org/search/?q=giefstat
 
+### Notes
+
+1. <font color="red">根据FGD测试结果, 离散变量可被stdize_values处理后视为连续变量, 代入MI-GIEF中进行计算</font>
+2. <font color="red">stdize_values在对连续变量处理过程时加入了噪音并归一化</font>
+
 ### Project Purpose
 
 This project aims to lay a basis for:
