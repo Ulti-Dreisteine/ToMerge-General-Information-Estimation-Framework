@@ -4,6 +4,8 @@ warnings.filterwarnings("ignore")
 
 from sklearn.neighbors import BallTree, KDTree
 from sklearn.preprocessing import MinMaxScaler
+from sklearn.metrics import mean_squared_error as mse, explained_variance_score as evs,\
+    r2_score as r2
 from scipy.special import gamma
 import category_encoders as ce
 import pandas as pd
@@ -11,7 +13,9 @@ import numpy as np
 import random
 
 
-# #### 数据编码 #####################################################################################
+####################################################################################################
+# 数据编码
+####################################################################################################
 
 UNSUPER_METHODS = ["ordinal", "random", "count"]
 SUPER_METHODS = ["target", "m_estimator", "james_stein", "glmm", "woe", "leave_one_out", "catboost", "mhg"]
@@ -155,8 +159,9 @@ class SuperCategorEncoding(object):
         return x_enc
     
 
-# #### 数据处理 #####################################################################################
-
+####################################################################################################
+# 数据处理 
+####################################################################################################
 
 # ---- 数据标准化 -----------------------------------------------------------------------------------
 
@@ -282,3 +287,43 @@ def build_td_series(x: np.ndarray, y: np.ndarray, tau: int, max_len: int = 5000)
         x_td, y_td = x_td[idxs], y_td[idxs]
 
     return x_td, y_td
+
+
+####################################################################################################
+# 模型评估 
+####################################################################################################
+
+def _cal_metric(y_true, y_pred, metric: str):
+    y_true, y_pred = y_true.flatten(), y_pred.flatten()
+    if metric == "r2":
+        return r2(y_true, y_pred)
+    if metric == "evs":
+        return evs(y_true, y_pred)
+    if metric == "mse":
+        return mse(y_true, y_pred)
+    if metric == "mape":
+        idxs = np.where(y_true != 0)
+        y_true = y_true[idxs]
+        y_pred = y_pred[idxs]
+        return np.sum(np.abs((y_pred - y_true) / y_true)) / len(y_true)
+
+
+# 模型评价
+def exec_model_test(X, y, model, metric: str="r2", test_ratio: float=0.3, rounds: int=10):
+    """执行建模测试"""
+    X, y = X.copy(), y.copy()
+    N = X.shape[0]
+    test_size = int(N * test_ratio)
+    metrics = []
+    for _ in range(rounds):
+        shuffled_indexes = np.random.permutation(range(N))
+        train_idxs = shuffled_indexes[test_size:]
+        test_idxs = shuffled_indexes[:test_size]
+
+        X_train, X_test = X[train_idxs, :], X[test_idxs, :]
+        y_train, y_test = y[train_idxs], y[test_idxs]
+
+        model.fit(X_train, y_train)
+        m = _cal_metric(y_test, model.predict(X_test), metric)
+        metrics.append(m)
+    return np.mean(metrics), metrics
