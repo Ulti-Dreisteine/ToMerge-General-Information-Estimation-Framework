@@ -123,7 +123,7 @@ class CondMIMaximization(object):
             features_rank.append(f)
             
             if verbose:
-                print(f"iteration i={i}: select feature no. {f}")
+                print(f"iteration i={i} \t select feature no. {f}")
             
             i += 1
             if i == max_iters:
