@@ -4,16 +4,16 @@
 
 https://pypi.org/search/?q=giefstat
 
-### Notes
-
-1. <font color="red">根据FGD测试结果, 离散变量可被stdize_values处理后视为连续变量, 代入MI-GIEF中进行计算</font>
-2. <font color="red">stdize_values在对连续变量处理过程时加入了噪音并归一化</font>
-
 ### Project Purpose
 
 This project aims to lay a basis for:
 1. computing higher-order information interactions between different types (discrete & continuous) of variables
 2. uncovering complex associations and causal relationships in high-dimensional data
+   
+### Notes
+
+1. <font color="red">根据FGD测试结果, 离散变量可被stdize_values处理后视为连续变量, 代入MI-GIEF中进行计算</font>
+2. <font color="red">stdize_values在对连续变量处理过程时加入了噪音并归一化</font>
 
 ### Project Structure
 
@@ -64,10 +64,15 @@ This project aims to lay a basis for:
     |   |       |-- mi_darbellay.py # 基于Darbellay离散化的互信息估计
     |   |   
     |   |-- statistical_tools
+    |   |   |-- __init__.py
+    |   |   |-- surrog_indep_test.py                # 基于代用数据的关联度量和独立性检验
+    |   |   |-- time_delayed_association.py         # 时延关联检测
+    |   |
+    |   |-- compact_recog
     |       |-- __init__.py
-    |       |-- surrog_indep_test.py                # 基于代用数据的关联度量和独立性检验
-    |       |-- time_delayed_association.py         # 时延关联检测
-    |
+    |       |-- cmim.py     # 基于CMIM-GIEF的紧凑变量排序算法
+    |       |-- fimt.py     # 基于FIMT测试的紧凑变量识别
+    |   
     |-- script
         |-- 独立性检验
         |   |-- indep_test.py               # 独立性检验测试
@@ -77,9 +82,20 @@ This project aims to lay a basis for:
         |   |-- cond_indep_test.py          # 条件独立性检验测试
         |
         |-- 时延关联检测
-            |-- four_species_test.ipynb     # 四种群时延关联检测测试
-            |-- four_siso_test.ipynb        # 四SISO系统时延关联检测测试
-
+        |   |-- four_species_test.ipynb     # 四种群时延关联检测测试
+        |   |-- four_siso_test.ipynb        # 四SISO系统时延关联检测测试
+        |
+        |-- 各系数耗时对比
+        |   |-- comparison.ipynb            # 耗时对比测试
+        |   |-- total_tc.csv                # 耗时测试结果
+        |
+        |-- 各相关和关联系数对比
+        |   |-- comparison.ipynb            # 各系数计算效果对比
+        |
+        |-- 一致性测试
+        |-- Darbellay分箱效果展示
+        |-- FGD过程数据关联测试
+        |-- 基于CMIM-GIEF的紧凑关联识别.ipynb
 ```
 
 file dependency plot：
@@ -128,5 +144,5 @@ estimate --cal_assoc & cal_cond_assoc--> cal_general_assoc
 2. ~~scipt/时延关联检测/main.py中背景值较高, 与代用数据计算结果不吻合~~
 3. statistital_significance/surrog_indep_test.py中通过随机抽样获得关联值分布
 4. ~~继续estimate中mic及剩下的部分的封装测试~~
-5. 一致性测试
-6. 时效性测试
+5. ~~一致性测试~~
+6. ~~时效性测试~~
