@@ -46,6 +46,7 @@ class CondMIMaximization(object):
         # 将所有变量均视为连续值类型, 加入噪声并归一化
         self.X = stdize_values(X, "c", EPS)
         self.y = stdize_values(y, "c", EPS)
+        assert self.X is not None
         self.N, self.D = self.X.shape
         self.n_jobs = n_jobs
         self.k = k      # MI-GIEF中计算的K近邻数

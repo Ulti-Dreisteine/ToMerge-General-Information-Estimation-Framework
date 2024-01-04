@@ -27,6 +27,7 @@ class MargEntropy(object):
     
     def __init__(self, x: np.ndarray):
         self.x_norm = stdize_values(x, "c")  # shape = (N, dim)
+        assert self.x_norm is not None
         self.dim = self.x_norm.shape[1]
         
     def __call__(self):
@@ -42,6 +43,8 @@ class MutualInfoKDE(object):
         self.x_norm = stdize_values(x, "c")  # shape = (N, dim)
         self.y_norm = stdize_values(y, "c")
         self.xy_norm = np.c_[self.x_norm, self.y_norm]
+        assert self.x_norm is not None
+        assert self.y_norm is not None
         self.dim_x = self.x_norm.shape[1]
         self.dim_y = self.y_norm.shape[1]
         

@@ -1,3 +1,4 @@
+from pyitlib import discrete_random_variable as drv
 import numpy as np
 
 from ..setting import DTYPES
@@ -16,7 +17,7 @@ ASSOC_METHODS = [
 ]
 COND_ASSOC_METHODS = [
     "CMI-GIEF", "CMI-model", "CMI-cut", "CMI-qcut",
-    "CMIC", "CRMIC"
+    "CMIC", "CRMIC", "DRV"
 ]
 
 
@@ -103,5 +104,7 @@ def cal_cond_assoc(x, y, z, method, xtype=None, ytype=None, ztype=None, **kwargs
         return CMIC(x, y, z)(method="mic")
     elif method == "CRMIC":
         return CMIC(x, y, z)(method="rmic")
+    elif method == "DRV":
+        return drv.information_mutual_conditional(x, y, z)
     else:
         raise ValueError(f"unsupported method {method}")
