@@ -79,7 +79,7 @@ class TransferEntropy(object):
             _idxs = random.sample(range(_N), sub_sample_size)
             _concat_XYY, _concat_YY = concat_XYY[_idxs, :], concat_YY[_idxs, :]
             
-            _te = 0
+            _te = 0.0
             eps = 1e-6
             for state in states_XYY:
                 prob1 = (_concat_XYY == state).all(axis = 1).sum() / sub_sample_size
